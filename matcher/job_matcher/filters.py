@@ -2,7 +2,7 @@ import re
 import operator
 from functools import reduce
 
-from django.db.models import Count, Q, F, Value, CharField
+from django.db.models import Count, Q
 from rest_framework import filters
 from rest_framework.exceptions import NotFound
 from django.template import loader
@@ -17,14 +17,6 @@ def str_to_int(str1):
     except:
         return None
 
-
-def get_title_match_str(title_match):
-    default = 'full'
-    if title_match and title_match.lower() == "partial":
-        return title_match.lower()
-    return default
-
-
 class CandidateFilterByJob(filters.BaseFilterBackend):
     # template = 'rest_framework/filters/ordering.html'
     template = f'{BASE_DIR}/templates/candidate_filter_by_job.html'
@@ -34,12 +26,18 @@ class CandidateFilterByJob(filters.BaseFilterBackend):
     partial_title_match = "partial"
     full_title_match = "full"
 
+    def get_title_match_str(self, title_match):
+        default = self.full_title_match
+        if title_match and title_match.lower() == self.partial_title_match:
+            return title_match.lower()
+        return default
+
     def filter_queryset(self, request, queryset, view):
         job_id_str = request.query_params.get(self.param_job)
         job_id = str_to_int(job_id_str)
         limit_number_str = request.query_params.get(self.param_limit)
         limit_number = str_to_int(limit_number_str)
-        title_match = get_title_match_str(request.query_params.get(self.param_title_match))
+        title_match = self.get_title_match_str(request.query_params.get(self.param_title_match))
         if job_id:
             try:
                 job = models.Job.objects.get(pk=job_id)
@@ -70,7 +68,7 @@ class CandidateFilterByJob(filters.BaseFilterBackend):
         options = []
         current_param_job = request.query_params.get(self.param_job)
         current_param_limit = request.query_params.get(self.param_limit)
-        current_param_title_match = get_title_match_str(request.query_params.get(self.param_title_match))
+        current_param_title_match = self.get_title_match_str(request.query_params.get(self.param_title_match))
         context = {
             'request': request,
             'current_param_job': current_param_job,

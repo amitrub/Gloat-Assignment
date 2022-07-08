@@ -17,18 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from job_matcher.models import Candidate
-from job_matcher.serializers import CandidateSerializer
-from job_matcher.views import SkillViewSet, CandidateViewSet, CandidateListView
+from job_matcher.views import SkillViewSet, CandidateMultiChoiceViewSet, CandidateListView
 
 router = DefaultRouter()
 router.register('skills', SkillViewSet)
 router.register('candidates', CandidateListView)
-# router.register('candidates', CandidateViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    # path('candidates/', CandidateViewSet.as_view(queryset=Candidate.objects.all(), serializer_class=CandidateSerializer), name='candidates-list'),
-    # path('try/', TryView.as_view()),
+
+    # ----------------- Multi Choice Example -----------------
+    path('create-candidates/', CandidateMultiChoiceViewSet.as_view(), name='candidates-list'),
 ]

@@ -12,22 +12,6 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 
-class SkillSerializer2(PrimaryKeyRelatedField, serializers.ModelSerializer):
-    """Serializer Skill"""
-
-    class Meta:
-        model = models.Skill
-        fields = ('name',)
-
-
-class SkillCandidateSerializer(serializers.ModelSerializer):
-    """Serializer Skill Candidate"""
-
-    class Meta:
-        model = models.Skill
-        fields = ('name',)
-
-
 class CandidateSerializer(serializers.ModelSerializer):
     """Serializer Candidate"""
     # skills = SkillSerializer2(many=True, queryset=Skill.objects.all())
@@ -37,6 +21,22 @@ class CandidateSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field='name'
     )
+
+    class Meta:
+        model = models.Candidate
+        fields = ('id', 'title', 'skills')
+
+
+# ----------------- Multi Choice Example -----------------
+
+class SkillMultiChoiceSerializer(PrimaryKeyRelatedField, serializers.ModelSerializer):
+    class Meta:
+        model: models.Skill
+        fields = ('name',)
+
+
+class CandidateMultiChoiceSerializer(serializers.ModelSerializer):
+    skills = SkillMultiChoiceSerializer(many=True, queryset=models.Skill.objects.all())
 
     class Meta:
         model = models.Candidate
