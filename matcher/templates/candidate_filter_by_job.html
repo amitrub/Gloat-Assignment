@@ -1,0 +1,49 @@
+{% load rest_framework %}
+{% load poll_extras %}
+{% load i18n %}
+<form class="form-inline">
+   <h3>{% trans "Title Match" %}</h3>
+   <div class="form-group">
+      <div class="form-check">
+         <div class="input-group">
+            <input type="radio" name={{ param_title_match }} value="full" {% if not current_param_title_match == partial_title_match %}checked{% endif %}>
+         </div>
+         <div class="input-group">
+            <label>
+            Full match
+            </label>
+         </div>
+      </div>
+      <div class="form-check">
+         <div class="input-group">
+            <input type="radio" name={{ param_title_match }} value="partial" {% if current_param_title_match == partial_title_match %}checked{% endif %}>
+         </div>
+         <div class="input-group">
+            <label>
+            Partial match
+            </label>
+         </div>
+      </div>
+      <h3>{% trans "Limit Number Of Candidate " %}</h3>
+      <div class="input-group">
+         <input type="number" class="form-control" style="width: 350px" name="{{ param_limit }}" value="{{ current_param_limit }}">
+         <input type="hidden" name={{ param_job }} value={{ current_param_job }} />
+         <span class="input-group-btn">
+         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> {% trans "Search" %}</button>
+         </span>
+      </div>
+   </div>
+</form>
+<br/>
+<div class="list-group">
+   <h3>{% trans "Candidate Filter By Job" %}</h3>
+   {% for key, label in options %}
+   {% if key == current_param_job %}
+   <a href="{% add_query_param request param_job key %}" class="list-group-item active">
+   <span class="glyphicon glyphicon-ok" style="float: right" aria-hidden="true"></span> {{ label }}
+   </a>
+   {% else %}
+   <a href="{% add_query_param request param_job key %}" class="list-group-item">{{ label }}</a>
+   {% endif %}
+   {% endfor %}
+</div>
