@@ -18,7 +18,7 @@ cd to $MAIN_DIR/Gloat-Assignment/matcher
 
 ### With Docker and MySql
 
-- you need to have on your device installed - docker.
+you need to have on your device installed - docker.
 - run the app by docker compose:
 
 ```
@@ -27,7 +27,7 @@ docker compose up
 
 ### With Local and Sqlite
 
-- you need to have on your device installed - python, pip, and if you are using MySql you need to install it too.
+you need to have on your device installed - python, pip, and if you are using MySql you need to install it too.
 - to setup app configuration run:
 ```
 ./setup
@@ -36,3 +36,14 @@ docker compose up
 ```
 python manage.py runserver
 ```
+## Use The Server
+enter to the url - http://127.0.0.1:8000/
+
+![main screen](https://user-images.githubusercontent.com/48449311/178037490-0542229d-0a9e-4c51-998e-6be3e3f29e06.png)
+
+- get all skills - http://127.0.0.1:8000/skills/
+- get all jobs - http://127.0.0.1:8000/jobs/
+- get all candidates - http://127.0.0.1:8000/candidates/
+
+### Candidate Filter By Job
+
