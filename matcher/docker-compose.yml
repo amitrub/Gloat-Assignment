@@ -34,6 +34,7 @@ services:
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
              python manage.py loaddata /app/fixtures/job_matcher.json --app job_matcher &&
+             python manage.py loaddata /app/fixtures/superuser.json --app job_matcher &&
              python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
