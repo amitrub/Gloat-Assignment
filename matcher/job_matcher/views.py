@@ -9,10 +9,15 @@ class SkillViewSet(viewsets.ModelViewSet):
     queryset = models.Skill.objects.all()
 
 
-class CandidateListView(viewsets.ReadOnlyModelViewSet):
+class CandidateViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Candidate.objects.all()
     serializer_class = serializers.CandidateSerializer
     filter_backends = (CandidateFilterByJob,)
+
+
+class JobViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Job.objects.all()
+    serializer_class = serializers.JobSerializer
 
 
 # ----------------- Multi Choice Example -----------------

@@ -19,6 +19,7 @@ class Skill(models.Model):
 class Candidate(models.Model):
     """Candidate Model"""
 
+    name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     skills = models.ManyToManyField(Skill, blank=True)
 
@@ -27,12 +28,13 @@ class Candidate(models.Model):
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        return f'{self.id}.{self.title}'
+        return f'{self.name}, {self.title}'
 
 
 class Job(models.Model):
     """Job Model"""
 
+    company = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     skills = models.ManyToManyField(Skill, blank=True)
 
@@ -41,4 +43,4 @@ class Job(models.Model):
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        return f'{self.id}.{self.title}'
+        return f'{self.company}, {self.title}'

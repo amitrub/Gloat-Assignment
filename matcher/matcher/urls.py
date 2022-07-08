@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from job_matcher.views import SkillViewSet, CandidateMultiChoiceViewSet, CandidateListView
+from job_matcher.views import SkillViewSet, CandidateMultiChoiceViewSet, CandidateViewSet, JobViewSet
 
 router = DefaultRouter()
 router.register('skills', SkillViewSet)
-router.register('candidates', CandidateListView)
+router.register('candidates', CandidateViewSet)
+router.register('jobs', JobViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

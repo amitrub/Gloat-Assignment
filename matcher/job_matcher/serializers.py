@@ -24,7 +24,20 @@ class CandidateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Candidate
-        fields = ('id', 'title', 'skills')
+        fields = ('id', 'name', 'title', 'skills')
+
+
+class JobSerializer(serializers.ModelSerializer):
+    """Serializer Job"""
+    skills = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+
+    class Meta:
+        model = models.Job
+        fields = ('id', 'company', 'title', 'skills')
 
 
 # ----------------- Multi Choice Example -----------------
