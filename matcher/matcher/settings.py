@@ -81,14 +81,14 @@ WSGI_APPLICATION = 'matcher.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES2 = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
-DATABASES = {
+DATABASES1 = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('MYSQL_DATABASE', 'matcher_db'),
@@ -99,6 +99,7 @@ DATABASES = {
     }
 }
 
+DATABASES = DATABASES1 if os.environ.get('USE_MYSQL') else DATABASES2
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
