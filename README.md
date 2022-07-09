@@ -27,11 +27,12 @@ docker compose up
 
 ### With Local and Sqlite
 
-you need to have on your device installed - python, pip, and if you are using MySql you need to install it too.
+you need to have on your device installed - python, pip.
 - to setup app configuration run:
 ```
-bash setup
+bash setup.sh
 ```
+
 - after setup if you want to run the app again run:
 ```
 python manage.py runserver
