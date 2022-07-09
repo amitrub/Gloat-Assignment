@@ -56,8 +56,6 @@ class CandidateFilterByJob(filters.BaseFilterBackend):
                 job_title_list = list(map(lambda x: re.sub(r"[^a-zA-Z0-9]", "", x), job_title.split()))
                 job_title_query_list = list(map(lambda x: Q(title__icontains=x), job_title_list))
                 queryset = queryset.filter(reduce(operator.or_, job_title_query_list))
-                # queryset = queryset.filter(reduce(operator.or_, job_title_query_list)).exclude(
-                #     title=job_title)
                 queryset = queryset.annotate(
                     num_skills=Count('skills', filter=Q(skills__id__in=job_skills))).order_by('-num_skills')
 
