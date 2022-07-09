@@ -30,7 +30,7 @@ docker compose up
 you need to have on your device installed - python, pip, and if you are using MySql you need to install it too.
 - to setup app configuration run:
 ```
-./setup
+bash setup
 ```
 - after setup if you want to run the app again run:
 ```
