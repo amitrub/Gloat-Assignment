@@ -18,7 +18,7 @@ cd to $MAIN_DIR/Gloat-Assignment/matcher
 
 ### With Docker and MySql
 
-you need to have on your device installed - docker.
+you need to have on your device installed - docker and docker compose .
 - run the app by docker compose:
 
 ```
@@ -27,11 +27,12 @@ docker compose up
 
 ### With Local and Sqlite
 
-you need to have on your device installed - python, pip, and if you are using MySql you need to install it too.
+you need to have on your device installed - python, pip.
 - to setup app configuration run:
 ```
-bash setup
+bash setup.sh
 ```
+
 - after setup if you want to run the app again run:
 ```
 python manage.py runserver
