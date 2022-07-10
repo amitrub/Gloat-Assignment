@@ -18,7 +18,7 @@ cd to $MAIN_DIR/Gloat-Assignment/matcher
 
 ### With Docker and MySql
 
-you need to have on your device installed - docker.
+you need to have on your device installed - docker and docker compose .
 - run the app by docker compose:
 
 ```
